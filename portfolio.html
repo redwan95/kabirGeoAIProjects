@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Portfolio | GeoAI & Urban Mobility</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --primary-light: #2c5282;
+            --accent: #0d9488;
+            --accent-light: #14b8a6;
+            --bg: #fafaf9;
+            --card: #ffffff;
+            --text: #1c1917;
+            --text-muted: #78716c;
+            --border: #e7e5e4;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 2rem;
+        }
+
+        .hero-tag {
+            background: rgba(255,255,255,0.15);
+            padding: 0.4rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Section Headers */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.25rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Table of Contents / Hyperlink Table */
+        .toc-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 3rem;
+        }
+
+        .toc-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .toc-table th {
+            text-align: left;
+            padding: 1rem;
+            background: var(--bg);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .toc-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .toc-table tr:hover td {
+            background: #fafaf9;
+        }
+
+        .toc-table a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .toc-table a:hover {
+            text-decoration: underline;
+        }
+
+        .toc-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+        }
+
+        .toc-keywords span {
+            background: #f0fdfa;
+            color: var(--accent);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Project Cards */
+        .project {
+            background: var(--card);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 4rem;
+            scroll-margin-top: 80px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-header::after {
+            content: '';
+            position: absolute;
+            right: -50px;
+            top: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .project-number {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 0.3rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .project-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .keyword {
+            background: rgba(255,255,255,0.15);
+            padding: 0.35rem 0.9rem;
+            border-radius: 9999px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.25);
+        }
+
+        .project-body {
+            padding: 2.5rem;
+        }
+
+        .content-block {
+            margin-bottom: 2rem;
+        }
+
+        .content-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .content-block h3 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .content-block h3::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 1.2em;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .content-block p {
+            color: var(--text);
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        .content-block ul {
+            margin-left: 1.5rem;
+            color: var(--text);
+        }
+
+        .content-block li {
+            margin-bottom: 0.5rem;
+            line-height: 1.7;
+        }
+
+        /* Figure Placeholders */
+        .figure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .figure-box {
+            background: var(--bg);
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .figure-box:hover {
+            border-color: var(--accent);
+            background: #f0fdfa;
+        }
+
+        .figure-box .fig-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .figure-box .fig-label {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .figure-box .fig-hint {
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .figure-full {
+            background: var(--bg);
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            color: var(--text-muted);
+            margin-top: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        /* Print Styles for PDF */
+        @media print {
+            nav {
+                display: none;
+            }
+
+            .hero {
+                padding: 3rem 2rem;
+                page-break-inside: avoid;
+            }
+
+            .project {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+                margin-bottom: 2rem;
+            }
+
+            .section {
+                padding: 2rem;
+            }
+
+            .toc-card {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            body {
+                background: white;
+            }
+
+            .project:hover {
+                transform: none;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .project-header h2 {
+                font-size: 1.4rem;
+            }
+
+            .figure-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .toc-table {
+                font-size: 0.85rem;
+            }
+
+            .toc-table th, .toc-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Research Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#project1">Project 1</a></li>
+                <li><a href="#project2">Project 2</a></li>
+                <li><a href="#project3">Project 3</a></li>
+                <li><a href="#project4">Project 4</a></li>
+                <li><a href="#project5">Project 5</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" id="overview">
+        <div class="hero-content">
+            <h1>GeoAI & Urban Mobility Research Portfolio</h1>
+            <p class="hero-subtitle">Dual-Perspective Analysis · Spatial Optimization · Climate Resilience · Machine Learning</p>
+            <div class="hero-tags">
+                <span class="hero-tag">GeoAI</span>
+                <span class="hero-tag">Urban Mobility</span>
+                <span class="hero-tag">Spatial Analysis</span>
+                <span class="hero-tag">Machine Learning</span>
+                <span class="hero-tag">Transit Optimization</span>
+                <span class="hero-tag">Climate Resilience</span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section" id="projects">
+        <div class="section-header">
+            <h2>Research Projects</h2>
+            <p>A curated collection of GeoAI-driven research at the intersection of urban planning, transportation, and spatial data science</p>
+        </div>
+
+        <!-- Hyperlink Table / Table of Contents -->
+        <div class="toc-card">
+            <h3>📋 Project Index & Quick Navigation</h3>
+            <table class="toc-table">
+                <thead>
+                    <tr>
+                        <th style="width: 8%">No.</th>
+                        <th style="width: 35%">Project Title</th>
+                        <th style="width: 35%">Keywords</th>
+                        <th style="width: 22%">Focus Area</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#project1">01</a></td>
+                        <td><a href="#project1">Dual-Perspective Transit KPI Framework</a></td>
+                        <td>
+                            <div class="toc-keywords">
+                                <span>GeoAI</span><span>GTFS</span><span>NTD</span><span>SED Mapping</span><span>GHG</span>
+                            </div>
+                        </td>
+                        <td>Greenville, SC</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#project2">02</a></td>
+                        <td><a href="#project2">Northeast US Hurricane Vulnerability & Resilience Analysis</a></td>
+                        <td>
+                            <div class="toc-keywords">
+                                <span>Big Data</span><span>Random Forest</span><span>SHAP</span><span>Hotspot</span>
+                            </div>
+                        </td>
+                        <td>Northeast US</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#project3">03</a></td>
+                        <td><a href="#project3">Urban Sentiment × Streetscape Quality</a></td>
+                        <td>
+                            <div class="toc-keywords">
+                                <span>BERT</span><span>NLP</span><span>OSM</span><span>TOD</span><span>K-Means</span>
+                            </div>
+                        </td>
+                        <td>Fayetteville, AR</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#project4">04</a></td>
+                        <td><a href="#project4">Reconstructing Urban Mobility Resilience: SF Dec 2025 Blackout</a></td>
+                        <td>
+                            <div class="toc-keywords">
+                                <span>Crisis Informatics</span><span>NLP</span><span>AV Networks</span><span>Spatial Reconstruction</span>
+                            </div>
+                        </td>
+                        <td>San Francisco, CA</td>
+                    </tr>
+                    <tr>
+                        <td><a href="#project5">05</a></td>
+                        <td><a href="#project5">AERO: Spatial Optimization and Climate Resilience of Renewable EV Infrastructure</a></td>
+                        <td>
+                            <div class="toc-keywords">
+                                <span>GIS-MCDA</span><span>EV</span><span>NREL</span><span>FEMA</span><span>Arkansas</span>
+                            </div>
+                        </td>
+                        <td>Arkansas</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PROJECT 1 -->
+        <article class="project" id="project1">
+            <div class="project-header">
+                <span class="project-number">Project 01</span>
+                <h2>Dual-Perspective Transit KPI Framework: Integrating GeoAI and Data-Driven Analysis for Urban Mobility in Greenville, SC</h2>
+                <div class="keywords">
+                    <span class="keyword">GeoAI</span>
+                    <span class="keyword">Urban Mobility</span>
+                    <span class="keyword">Travel Behavior Modeling</span>
+                    <span class="keyword">GTFS Analysis</span>
+                    <span class="keyword">NTD Metrics</span>
+                    <span class="keyword">Transit Optimization</span>
+                    <span class="keyword">Spatial Accessibility</span>
+                    <span class="keyword">Network Efficiency</span>
+                    <span class="keyword">GHG Emission Modeling</span>
+                    <span class="keyword">Socio-Economic Disadvantage (SED) Mapping</span>
+                </div>
+            </div>
+            <div class="project-body">
+                <div class="content-block">
+                    <h3>Project Overview</h3>
+                    <p>This project, titled the Dual-Perspective Transit KPI Framework, integrates GeoAI and data-driven analysis to evaluate the efficiency and sustainability of urban mobility in Greenville, SC. By synthesizing GTFS spatial data with NTD operational metrics and Census socio-economic indicators, the framework implements complex travel behavior modeling and network performance evaluations. The research focuses on simulation and optimization of service delivery across Fixed-Route and Demand-Response Transit, utilizing geospatial joins and statistical regressions to quantify accessibility, environmental impact (GHG emissions), and cost-effectiveness. Key research themes include urban mobility optimization, accessibility modeling, spatial demographics, and transit equity analysis, providing a scalable toolkit for evidence-based transit planning and policy design.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Figures & Visualizations</h3>
+                    <div class="figure-grid">
+                        <div class="figure-box">
+                            <div class="fig-icon">🗺️</div>
+                            <div class="fig-label">Figure 1</div>
+                            <div class="fig-hint">GTFS Spatial Network Analysis Map<br><em>(Replace with media/image1.png)</em></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- PROJECT 2 -->
+        <article class="project" id="project2">
+            <div class="project-header">
+                <span class="project-number">Project 02</span>
+                <h2>Northeast US Hurricane Vulnerability & Resilience Analysis: Building & Census Tract Level Analysis with Hurricane Intensity Variables</h2>
+                <div class="keywords">
+                    <span class="keyword">Big Data</span>
+                    <span class="keyword">GeoAI</span>
+                    <span class="keyword">Open Source Data</span>
+                    <span class="keyword">Hurricane Resilience</span>
+                    <span class="keyword">Spatial Analysis</span>
+                    <span class="keyword">Machine Learning</span>
+                    <span class="keyword">Vulnerability</span>
+                </div>
+            </div>
+            <div class="project-body">
+                <div class="content-block">
+                    <h3>Project Overview</h3>
+                    <p>This project integrates real-world big data from US Census ACS and TIGER/Line geospatial datasets with advanced GeoAI techniques, including Random Forest and SHAP for predictive modeling and spatial hotspot analysis, all within an open-source data framework, to provide a comprehensive hurricane vulnerability and resilience assessment.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Summary Output</h3>
+                    <p>The analysis revealed a compound vulnerability model, demonstrating that hurricane damage is driven by a complex interplay of factors. Key findings indicate that infrastructure age is a primary driver of vulnerability, with older buildings and pre-1960 housing significantly increasing damage risk. Mobility constraints, such as zero-vehicle households and public transit dependence, emerged as a critical new factor amplifying vulnerability, particularly in dense urban areas. The study also confirmed significant socio-economic disparities, showing that lower-income, higher-poverty, and older populations are disproportionately affected. A hierarchical regression model effectively quantified the cumulative impact of these factors, and advanced machine learning techniques, particularly Random Forest, achieved excellent predictive performance, identifying infrastructure age, sustained wind, and coastal proximity as top predictors. Finally, spatial hotspot analysis pinpointed specific geographic areas with concentrated damage clustering, highlighting regions in urgent need of resilience interventions.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Figures & Visualizations</h3>
+                    <div class="figure-grid">
+                        <div class="figure-box">
+                            <div class="fig-icon">🌀</div>
+                            <div class="fig-label">Figure 2</div>
+                            <div class="fig-hint">Vulnerability Hotspot Analysis Map<br><em>(Replace with media/image2.png)</em></div>
+                        </div>
+                        <div class="figure-box">
+                            <div class="fig-icon">📊</div>
+                            <div class="fig-label">Figure 3</div>
+                            <div class="fig-hint">Predictive Model Results / SHAP Analysis<br><em>(Replace with media/image3.png)</em></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- PROJECT 3 -->
+        <article class="project" id="project3">
+            <div class="project-header">
+                <span class="project-number">Project 03</span>
+                <h2>Urban Sentiment × Streetscape Quality: A GeoAI Analysis of Transit Accessibility and Emotional Experience in Fayetteville, AR</h2>
+                <div class="keywords">
+                    <span class="keyword">GeoAI</span>
+                    <span class="keyword">Urban Mobility</span>
+                    <span class="keyword">Sentiment Analysis</span>
+                    <span class="keyword">Transit-Oriented Development (TOD)</span>
+                    <span class="keyword">Streetscape Quality</span>
+                    <span class="keyword">Spatial Statistics</span>
+                    <span class="keyword">NLP in Planning</span>
+                </div>
+            </div>
+            <div class="project-body">
+                <div class="content-block">
+                    <h3>Project Overview</h3>
+                    <p>This research project employs GeoAI to map the intersection of urban sentiment and streetscape quality in Fayetteville, Arkansas, integrating BERT-based NLP on local texts with OSM infrastructure data. The findings demonstrate that green space and pedestrian path density are significantly stronger predictors of positive public sentiment (Adjusted R² = 0.407) than transit access alone, revealing that the emotional quality of urban mobility is heavily mediated by the physical streetscape. Through spatial clustering and K-Means typology, the analysis identifies critical inequality gaps in the transit network, suggesting that planning interventions must prioritize shaded, walkable environments to effectively improve the subjective experience of transit accessibility.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Figures & Visualizations</h3>
+                    <div class="figure-grid">
+                        <div class="figure-box">
+                            <div class="fig-icon">💬</div>
+                            <div class="fig-label">Figure 4</div>
+                            <div class="fig-hint">Sentiment-Transit Spatial Correlation Map<br><em>(Replace with media/image4.png)</em></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- PROJECT 4 -->
+        <article class="project" id="project4">
+            <div class="project-header">
+                <span class="project-number">Project 04</span>
+                <h2>Reconstructing Urban Mobility Resilience via GeoAI: The SF Dec 2025 Blackout</h2>
+                <div class="keywords">
+                    <span class="keyword">GeoAI</span>
+                    <span class="keyword">Urban Mobility</span>
+                    <span class="keyword">Crisis Informatics</span>
+                    <span class="keyword">Spatial Analysis</span>
+                    <span class="keyword">Autonomous Vehicles</span>
+                    <span class="keyword">Infrastructure Resilience</span>
+                </div>
+            </div>
+            <div class="project-body">
+                <div class="content-block">
+                    <h3>Project Overview</h3>
+                    <p>This project utilizes GeoAI and Natural Language Processing (NLP) to reconstruct mobility disruptions during the December 2025 San Francisco power blackout. By synthesizing unstructured archival web data and verified news reports, the analysis maps the spatial and temporal impact of the outage on autonomous vehicle (AV) networks and public transit infrastructure. The study demonstrates how AI-driven spatial reconstruction can identify vulnerabilities in smart-city systems and inform urban resilience planning by bridging the data gap during critical infrastructure failures.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Summary Output</h3>
+                    <p>The analysis reveals that mobility disruptions significantly outlasted the initial power failure, with robotaxi service pauses occurring six hours post-incident and spatial clusters of stalled vehicles predominantly concentrated within 100 meters of non-functional traffic signals in the SoMa and Civic Center districts.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Figures & Visualizations</h3>
+                    <div class="figure-grid">
+                        <div class="figure-box">
+                            <div class="fig-icon">🚗</div>
+                            <div class="fig-label">Figure 5</div>
+                            <div class="fig-hint">AV Network Disruption Timeline<br><em>(Replace with media/image5.png)</em></div>
+                        </div>
+                        <div class="figure-box">
+                            <div class="fig-icon">⚡</div>
+                            <div class="fig-label">Figure 6</div>
+                            <div class="fig-hint">Spatial Clustering of Stalled Vehicles<br><em>(Replace with media/image6.png)</em></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- PROJECT 5 -->
+        <article class="project" id="project5">
+            <div class="project-header">
+                <span class="project-number">Project 05</span>
+                <h2>AERO: Spatial Optimization and Climate Resilience of Renewable EV Infrastructure</h2>
+                <div class="keywords">
+                    <span class="keyword">GeoAI</span>
+                    <span class="keyword">Urban Mobility</span>
+                    <span class="keyword">EV Infrastructure</span>
+                    <span class="keyword">GIS-MCDA</span>
+                    <span class="keyword">Climate Resilience</span>
+                    <span class="keyword">Renewable Energy</span>
+                    <span class="keyword">Spatial Analytics</span>
+                    <span class="keyword">Arkansas</span>
+                </div>
+            </div>
+            <div class="project-body">
+                <div class="content-block">
+                    <h3>Project Overview</h3>
+                    <p>This research develops the Arkansas EV Resilience Optimizer (AERO), a GeoAI-driven framework designed to strategically deploy renewable-powered charging stations. By utilizing GIS-MCDA (Multi-Criteria Decision Analysis), the project synthesizes high-resolution solar potential from NREL, climate hazard data from FEMA, and existing infrastructure density to solve complex urban mobility challenges. The methodology prioritizes expanding coverage to underserved rural regions while ensuring long-term operational cost-efficiency and infrastructure durability against extreme weather events.</p>
+                </div>
+                <div class="content-block">
+                    <h3>Summary Output / Key Findings</h3>
+                    <ul>
+                        <li>Identified <strong>Lincoln, Phillips, and Cleveland</strong> as top-tier counties for infrastructure investment using a custom Deployment Priority Index (DPI).</li>
+                        <li>Uncovered significant disparities in current access, with <strong>57 counties (76%)</strong> currently lacking public charging stations.</li>
+                        <li>Determined that <strong>37 counties</strong> exceed the state's median climate risk, necessitating specialized grid-hardening for future mobility hubs.</li>
+                        <li>Established a strong correlation (<strong>R² = 0.62</strong>) between solar potential and suitability, validating renewable energy as a key driver for sustainable mobility.</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <h3>Figures & Visualizations</h3>
+                    <div class="figure-grid">
+                        <div class="figure-box">
+                            <div class="fig-icon">🔋</div>
+                            <div class="fig-label">Figure 7</div>
+                            <div class="fig-hint">AERO Deployment Priority Index Map<br><em>(Replace with media/image7.png)</em></div>
+                        </div>
+                        <div class="figure-box">
+                            <div class="fig-icon">☀️</div>
+                            <div class="fig-label">Figure 8</div>
+                            <div class="fig-hint">Solar Potential & Suitability Analysis<br><em>(Replace with media/image8.png)</em></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </section>
+
+    <footer>
+        <p>GeoAI & Urban Mobility Research Portfolio · PhD Application Materials</p>
+        <p style="margin-top: 0.5rem; opacity: 0.6; font-size: 0.8rem;">Built with modern web standards · Optimized for print-to-PDF</p>
+    </footer>
+
+</body>
+</html>
